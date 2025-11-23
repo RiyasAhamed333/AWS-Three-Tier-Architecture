@@ -97,11 +97,18 @@ Cloud Networking & Infrastructure as Architecture
 High Availability & Scalability Best Practices
 
 📦 Project Structure
+
 aws-three-tier-app/
 │── web-tier/
+
 │── app-tier/
+
 │── db-tier/
-│── architecture-diagram.png
+
+│── images/
+
+│ └── 3TierArch.png
+
 └── README.md
 
 🔐 Security
