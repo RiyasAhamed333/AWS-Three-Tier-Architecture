@@ -1,31 +1,119 @@
-# AWS Three Tier Web Architecture Workshop
+🚀 AWS Three-Tier Web Architecture – Production-Ready Deployment
 
-## Description: 
-This workshop is a hands-on walk through of a three-tier web architecture in AWS. We will be manually creating the necessary network, security, app, and database components and configurations in order to run this architecture in an available and scalable manner.
+📌 Project Overview
 
-## Audience:
-Although this is an introductory level workshop, it is intended for those who have a technical role. The assumption is that you have at least some foundational aws knowledge around VPC, EC2, RDS, S3, ELB and the AWS Console.  
+This project demonstrates a highly available, scalable, and secure three-tier web architecture on AWS, following real-world cloud engineering and DevOps best practices.
+The system is designed to mimic production-grade enterprise applications commonly used in modern web platforms.
 
-## Pre-requisites:
-1. An AWS account. If you don’t have an AWS account, follow the instructions [here](https://aws.amazon.com/console/) and
-click on “Create an AWS Account” button in the top right corner to create one.
-1. IDE or text editor of your choice.
+The architecture includes:
 
-## Architecture Overview
-![Architecture Diagram](https://github.com/aws-samples/aws-three-tier-web-architecture-workshop/blob/main/application-code/web-tier/src/assets/3TierArch.png)
+Web Tier (Presentation Layer) – Public-facing Nginx servers behind an Application Load Balancer
 
-In this architecture, a public-facing Application Load Balancer forwards client traffic to our web tier EC2 instances. The web tier is running Nginx webservers that are configured to serve a React.js website and redirects our API calls to the application tier’s internal facing load balancer. The internal facing load balancer then forwards that traffic to the application tier, which is written in Node.js. The application tier manipulates data in an Aurora MySQL multi-AZ database and returns it to our web tier. Load balancing, health checks and autoscaling groups are created at each layer to maintain the availability of this architecture.
+Application Tier (Logic Layer) – Node.js backend behind a private/internal Load Balancer
 
-## Workshop Instructions:
+Database Tier (Data Layer) – Amazon Aurora MySQL Multi-AZ cluster
 
-See [AWS Three Tier Web Architecture](https://catalog.us-east-1.prod.workshops.aws/workshops/85cd2bb2-7f79-4e96-bdee-8078e469752a/en-US)
+This project showcases your practical ability to design, deploy, and configure end-to-end cloud infrastructure on AWS.
+
+🏗️ Architecture Diagram
+
+![AWS 3-Tier Architecture](/mnt/data/3TierArch.png)
 
 
-## Security
+🔹 Component Overview
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+| Layer                | AWS Services Used                         | Purpose                                          |
+| -------------------- | ----------------------------------------- | ------------------------------------------------ |
+| **Web Tier**         | ALB (public), EC2 (Nginx), Auto Scaling   | Serves frontend, handles client traffic          |
+| **Application Tier** | Internal ALB, EC2 (Node.js), Auto Scaling | Processes API requests, business logic           |
+| **Database Tier**    | Amazon Aurora MySQL Multi-AZ              | Stores and retrieves data with high availability |
+| **Networking**       | VPC, Subnets, Route Tables, NAT, IGW, SGs | Secure, isolated, production-ready network       |
 
-## License
+🔥 Key Features
+✔ Production-Grade Networking
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
+Custom VPC with public, private, and DB subnets
 
+Internet Gateway & NAT Gateway
+
+Routing for secure traffic flow
+
+✔ Scalable EC2 Architecture
+
+Auto Scaling Groups for web and app tiers
+
+Health checks at both load balancers
+
+Automated instance replacement
+
+✔ Secure Multi-Tier Design
+
+Web → App → DB communication only
+
+Security Groups and NACLs configured with least privilege
+
+No direct internet exposure for the app and DB layers
+
+✔ High Availability & Fault Tolerance
+
+ALB + Internal ALB for distribution
+
+Multi-AZ Aurora MySQL deployment
+
+Redundant infrastructure across AZs
+
+🧩 How the Architecture Works
+
+Clients connect to a public Application Load Balancer.
+
+The ALB forwards traffic to Web Tier EC2 instances running Nginx + React.js.
+
+Web tier routes backend requests to internal Load Balancer.
+
+Internal ALB forwards traffic to Application Tier EC2 instances running Node.js.
+
+Application tier interacts with Aurora MySQL Multi-AZ for data operations.
+
+Responses propagate back through the tiers to the client.
+
+This layered approach improves security, scalability, fault tolerance, and manageability.
+
+🏁 Skills Demonstrated
+
+AWS VPC Design (Subnets, IGW, NAT, Route Tables)
+
+EC2, Auto Scaling, and Load Balancers
+
+Aurora MySQL Multi-AZ Deployment
+
+Secure multi-tier architecture
+
+Nginx + React.js (frontend deployment)
+
+Node.js (backend API logic)
+
+Cloud Networking & Infrastructure as Architecture
+
+High Availability & Scalability Best Practices
+
+📦 Project Structure
+aws-three-tier-app/
+│── web-tier/
+│── app-tier/
+│── db-tier/
+│── architecture-diagram.png
+└── README.md
+
+🔐 Security
+
+Principle of least privilege applied
+
+Security groups restrict communication between tiers
+
+Database is only accessible from application tier
+
+No public exposure of backend or database
+
+📄 License
+
+MIT-0 License – free to use for learning and professional purposes.
